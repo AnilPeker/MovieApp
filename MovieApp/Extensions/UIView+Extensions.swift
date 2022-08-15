@@ -160,4 +160,14 @@ extension UIView {
         return seperator
     }
     
+    static func makeVStack(with horizontalPadding: CGFloat = 0, spacing: CGFloat = 0) -> UIStackView{
+        let vStack = UIStackView()
+        vStack.translatesAutoresizingMaskIntoConstraints = false
+        vStack.axis = .vertical
+        vStack.spacing = spacing
+        vStack.isLayoutMarginsRelativeArrangement = true
+        vStack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: horizontalPadding, bottom: 0, trailing: horizontalPadding)
+        return vStack
+    }
+    
 }

@@ -127,8 +127,8 @@ extension MovieListVC: MovieListVMDelegateOutputs {
 
 extension MovieListVC {
     enum Constants: String, CustomStringConvertible {
-        case pageTitle = "Filmler"
-        case searchPlaceholder = "Arama"
+        case pageTitle = "Movies"
+        case searchPlaceholder = "Search"
         
         var description: String { return self.rawValue }
     }

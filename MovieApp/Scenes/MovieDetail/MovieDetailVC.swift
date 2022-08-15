@@ -12,15 +12,12 @@ class MovieDetailVC: UIViewController {
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentInset.bottom = 50
         return scrollView
     }()
     
     lazy var vStack: UIStackView = {
-        let vStack = UIStackView()
-        vStack.translatesAutoresizingMaskIntoConstraints = false
-        vStack.axis = .vertical
-        vStack.spacing = 16
-        return vStack
+        return UIView.makeVStack(with: 0,spacing: 16)
     }()
     
     lazy var movieImage: UIImageView = {
@@ -77,6 +74,7 @@ class MovieDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = Constants.pageTitle.description
         viewModel.fetchDetails()
     }
     
@@ -103,15 +101,18 @@ class MovieDetailVC: UIViewController {
     }
     
     private func setupHeaderDesc() {
+        let headerVStack = UIView.makeVStack(with: 16, spacing: 16)
         movieImage.setImage(with: viewModel.model?.posterPath ?? "")
         movieNameLbl.text = viewModel.model?.title ?? ""
         movieSummaryLbl.text = viewModel.model?.overview
         
         vStack.addArrangedSubview(movieImage)
-        vStack.addArrangedSubview(movieNameLbl)
-        vStack.addArrangedSubview(UIView.makeSeperator())
-        vStack.addArrangedSubview(movieSummaryLbl)
-        vStack.addArrangedSubview(UIView.makeSeperator())
+        headerVStack.addArrangedSubview(movieNameLbl)
+        headerVStack.addArrangedSubview(UIView.makeSeperator())
+        headerVStack.addArrangedSubview(movieSummaryLbl)
+        headerVStack.addArrangedSubview(UIView.makeSeperator())
+        
+        vStack.addArrangedSubview(headerVStack)
     }
     
     private func setupRating() {
@@ -132,14 +133,14 @@ class MovieDetailVC: UIViewController {
 // MARK: - UI FACTORY
 extension MovieDetailVC {
     private func makeVideosArea(with model: [Video]) -> UIStackView {
-        let vStack = UIStackView()
-        vStack.axis = .vertical
-        vStack.spacing = 5
+        let vStack = UIView.makeVStack(with: 16, spacing: 5)
+        vStack.addArrangedSubview(videosHeaderLbl)
+        vStack.distribution = .fillEqually
         model.forEach { data in
             let titleDescView = VerticalTitleDescView()
             titleDescView.setupUI(title: data.name, desc: data.site)
             titleDescView.translatesAutoresizingMaskIntoConstraints = false
-            vStack.addArrangedSubview(vStack)
+            vStack.addArrangedSubview(titleDescView)
         }
         return vStack
     }

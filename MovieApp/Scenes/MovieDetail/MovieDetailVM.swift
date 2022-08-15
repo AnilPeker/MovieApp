@@ -51,9 +51,9 @@ class MovieDetailVM: MovieDetailVMDelegate {
             switch response {
             case .success(let data):
                 self.model = data
-                self.fetchCast()
-                //self.fetchVideos()
                 self.notify(output: .movieDetailFetched)
+                self.fetchCast()
+                self.fetchVideos()
             case .failure(let error):
                 self.notify(output: .fail(error.localizedDescription))
             }

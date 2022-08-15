@@ -29,8 +29,8 @@ class CastCarousel: UIView, CastCarouselDelegate {
         collectionView.register(CastCell.self, forCellWithReuseIdentifier: CastCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset.left = 10
-        collectionView.contentInset.right = 10
+        collectionView.contentInset.left = 16
+        collectionView.contentInset.right = 16
         collectionView.showsHorizontalScrollIndicator = false
         
         collectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
