@@ -24,17 +24,27 @@ protocol MovieListVMDelegateOutputs: AnyObject {
 
 enum MovieListVMOutputs {
     case reloadData
+    case resultNotFound
     case fail(String)
 }
 
 class MovieListVM: MovieListVMDelegate {
     weak var delegate: MovieListVMDelegateOutputs? //Note: Maked weak to be carefull memory management.
     private let service: MovieServiceProtocol = Api()
+    private var dispatchWorkItem: DispatchWorkItem?
     var movies: [Movie] = []
     var searchText: String = "" {
         didSet {
+            guard searchText.count > 0 || movies.isEmpty else { return }
             resetList()
-            fetchMovies()
+            dispatchWorkItem?.cancel()
+            dispatchWorkItem = DispatchWorkItem { [weak self] in
+                guard let self = self else { return }
+                self.fetchMovies()
+            }
+            
+            // To wait until writing over
+            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5, execute: dispatchWorkItem!)
         }
     }
     var goToDetail: (() -> ())?
@@ -55,7 +65,7 @@ class MovieListVM: MovieListVMDelegate {
         guard page != totalPage else { return }
         
         let queryItems: [String: String] = ["api_key": ApiConstants.apiKey,
-                                            "page": "\(page + 1)"]
+                                            "page": "\(page)"]
         service.getMostPopularMovies(queryItems: queryItems) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -63,10 +73,13 @@ class MovieListVM: MovieListVMDelegate {
                 let page = data.page
                 let movies = data.results
                 let totalPage = data.totalPages
-                self.page = page
+                self.page = page + 1
                 self.totalPage = totalPage
                 self.movies.appends(movies)
-                self.notify(output: .reloadData)
+                self.movies.isEmpty ? self.notify(output: .resultNotFound):
+                                      self.notify(output: .reloadData)
+                
+                
             case .failure(let error):
                 self.notify(output: .fail(error.localizedDescription))
             }
@@ -78,7 +91,7 @@ class MovieListVM: MovieListVMDelegate {
         
         let queryItems: [String: String] = ["api_key": ApiConstants.apiKey,
                                             "query": searchText,
-                                            "page": "\(page + 1)"]
+                                            "page": "\(page)"]
         
         service.getSearchedMovies(queryItems: queryItems) { [weak self] response in
             guard let self = self else { return }
@@ -87,10 +100,11 @@ class MovieListVM: MovieListVMDelegate {
                 let page = data.page
                 let movies = data.results
                 let totalPage = data.totalPages
-                self.page = page
+                self.page = page + 1
                 self.totalPage = totalPage
                 self.movies.appends(movies)
-                self.notify(output: .reloadData)
+                self.movies.isEmpty ? self.notify(output: .resultNotFound):
+                                      self.notify(output: .reloadData)
             case .failure(let error):
                 self.notify(output: .fail(error.localizedDescription))
             }

@@ -43,6 +43,13 @@ class MovieListVC: UIViewController {
         return collectionView
     }()
     
+    lazy var emptyView: MovieListEmptyView = {
+       let emptyView = MovieListEmptyView()
+        emptyView.setupUI()
+        emptyView.isHidden = true
+        return emptyView
+    }()
+    
     var viewModel: MovieListVMDelegate!
     
     override func viewDidLoad() {
@@ -60,6 +67,7 @@ extension MovieListVC {
         view.addSubview(vStack)
         vStack.addArrangedSubview(searchBar)
         vStack.addArrangedSubview(collectionView)
+        vStack.addArrangedSubview(emptyView)
         vStack.layout.pinHorizontalEdgesToSuperView(padding: 0)
         vStack.layout.pinTopToSuperview(constant: 100)
         vStack.layout.pinBottomToSuperview(constant: 0)
@@ -104,8 +112,12 @@ extension MovieListVC: MovieListVMDelegateOutputs {
     func handleViewModelOutputs(_ outputs: MovieListVMOutputs) {
         switch outputs {
         case .reloadData:
+            collectionView.isHidden = false
+            emptyView.isHidden = true
             collectionView.reloadData()
-            break
+        case .resultNotFound:
+            collectionView.isHidden = true
+            emptyView.isHidden = false
         case .fail(let string):
             break
         }
