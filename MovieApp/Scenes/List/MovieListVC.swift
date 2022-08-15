@@ -88,7 +88,8 @@ extension MovieListVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let movieId = viewModel.movies[indexPath.row].id ?? -1
+        viewModel.showMovieDetail?(movieId)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

@@ -146,4 +146,18 @@ extension UIView {
         return Layout(self)
     }
     
+    func roundCorners(with CACornerMask: CACornerMask = [.layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner,.layerMaxXMaxYCorner],
+                      radius: CGFloat) {
+        self.layer.cornerRadius = radius
+        self.layer.maskedCorners = [CACornerMask]
+    }
+    
+    static func makeSeperator() -> UIView {
+        let seperator = UIView()
+        seperator.translatesAutoresizingMaskIntoConstraints = false
+        seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        seperator.backgroundColor = .gray.withAlphaComponent(0.2)
+        return seperator
+    }
+    
 }

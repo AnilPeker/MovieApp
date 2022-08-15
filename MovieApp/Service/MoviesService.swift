@@ -13,7 +13,6 @@ protocol MovieServiceProtocol {
 }
 
 extension Api: MovieServiceProtocol {
-    
     func getMostPopularMovies(queryItems: [String: String], completion: @escaping (Result<MoviesResponseModel, NetworkError>) -> Void) {
         network.get(from: ApiConstants.getPopularMovie, queryItems: queryItems, showSpinner: true, completion: completion)
     }
@@ -21,4 +20,5 @@ extension Api: MovieServiceProtocol {
     func getSearchedMovies(queryItems: [String : String], completion: @escaping (Result<MoviesResponseModel, NetworkError>) -> Void) {
         network.get(from: ApiConstants.getSearchMovie, queryItems: queryItems, showSpinner: true, completion: completion)
     }
+    
 }

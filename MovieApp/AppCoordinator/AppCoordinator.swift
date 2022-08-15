@@ -22,13 +22,32 @@ class AppCoordinator {
         self.navigationController.pushViewController(viewController, animated: false)
     }
 }
+// MARK: - Show Functions
+private extension AppCoordinator {
+    func showMovieDetail(movieId: Int) {
+        let viewController = makeMovieDetail(movieId: movieId)
+        self.navigationController.setNavigationBarHidden(false, animated: false)
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+}
+
+
 // MARK: - Controller Factory
 private extension AppCoordinator {
     func makeMovieList() -> MovieListVC {
         let viewController = MovieListVC()
         let viewModel = MovieListVM()
-        viewController.viewModel = viewModel
         viewModel.delegate = viewController
+        viewModel.showMovieDetail = showMovieDetail(movieId:)
+        viewController.viewModel = viewModel
+        return viewController
+    }
+    
+    func makeMovieDetail(movieId: Int) -> MovieDetailVC {
+        let viewController = MovieDetailVC()
+        let viewModel = MovieDetailVM(with: movieId)
+        viewModel.delegate = viewController
+        viewController.viewModel = viewModel
         return viewController
     }
 }

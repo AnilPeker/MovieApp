@@ -22,5 +22,10 @@ struct ApiConstants {
     
     static let getPopularMovie = baseUrl + "movie/popular"
     static let getSearchMovie = baseUrl + "search/movie"
+    static let getMovieDetail = baseUrl + "movie/%@" //movieId
+    static let getMovieCast = baseUrl + "movie/%@/credits" //movieId
+    static let getMovieVideos = baseUrl + "movie/%@/videos" //movieId
+    
+    
     
 }

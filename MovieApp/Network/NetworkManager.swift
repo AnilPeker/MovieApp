@@ -22,12 +22,16 @@ final class NetworkManager: ExecuterProtocol {
         return session.dataTask(with: urlRequest) { data, urlResponse, error in
             
             guard error == nil else {
-                completion(.failure(.custom(error?.localizedDescription)))
+                onMain {
+                    completion(.failure(.custom(error?.localizedDescription)))
+                }
                 return
             }
             
             guard let data = data else {
-                completion(.failure(.noData))
+                onMain {
+                    completion(.failure(.noData))
+                }
                 return
             }
             
@@ -45,7 +49,9 @@ final class NetworkManager: ExecuterProtocol {
             }
             
         } catch {
-            completion(.failure(.decoding("Decoding Error")))
+            onMain {
+                completion(.failure(.decoding("Decoding Error")))
+            }
         }
     }
 }

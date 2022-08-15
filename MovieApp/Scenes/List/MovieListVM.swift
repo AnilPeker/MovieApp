@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MovieListVMCoordinatorProtocol {
-    var goToDetail: (() -> ())? { get set }
+    var showMovieDetail: ((Int) -> ())? { get set }
 }
 
 protocol MovieListVMDelegate: MovieListVMCoordinatorProtocol {
@@ -47,7 +47,7 @@ class MovieListVM: MovieListVMDelegate {
             DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5, execute: dispatchWorkItem!)
         }
     }
-    var goToDetail: (() -> ())?
+    var showMovieDetail: ((Int) -> ())?
     
     private var page: Int = 1
     private var totalPage: Int = 0
