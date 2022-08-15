@@ -10,10 +10,8 @@ import UIKit
 import Kingfisher
 
 class ImagePlaceholder: UIView, Placeholder {
-    
-    override func awakeFromNib() {
+    func setupUI() {
         let backgroundColor: UIColor = .black.withAlphaComponent(0.2)
         self.backgroundColor = backgroundColor
     }
-    
 }

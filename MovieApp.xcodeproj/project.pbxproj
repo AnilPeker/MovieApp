@@ -260,7 +260,6 @@
 		27569C7A28A9480F00AD72FE /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				27569C8A28A964B000AD72FE /* ApiConstants.swift */,
 				27569C8D28A967AF00AD72FE /* ExecuterProtocol.swift */,
 				27569C8F28A967CE00AD72FE /* NetworkError.swift */,
 				27569C9128A96A5B00AD72FE /* NetworkDefauts.swift */,
@@ -298,6 +297,7 @@
 		27569C9928AA2A8300AD72FE /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				27569C8A28A964B000AD72FE /* ApiConstants.swift */,
 				27569C9A28AA2A9B00AD72FE /* Api.swift */,
 				27569C9E28AA37A400AD72FE /* MoviesService.swift */,
 			);

@@ -15,7 +15,7 @@ enum HTTPMethod: String {
 }
 
 protocol NetworkProtocol {
-    func get<T: Decodable>(from endpoint: String, showSpinner: Bool, completion: @escaping (Result<T,NetworkError>) -> ())
+    func get<T: Decodable>(from endpoint: String, queryItems: [String : String], showSpinner: Bool, completion: @escaping (Result<T,NetworkError>) -> ())
 }
 
 final class Network: NetworkProtocol {
@@ -26,9 +26,18 @@ final class Network: NetworkProtocol {
     }
 
     func get<T>(from endpoint: String,
+                queryItems: [String : String],
                 showSpinner: Bool = true,
                 completion: @escaping (Result<T, NetworkError>) -> ()) where T : Decodable {
-        guard let url = URL(string: endpoint) else {
+        
+        var urlComponent = URLComponents(string: endpoint) 
+        var queryItemsArray: [URLQueryItem] = []
+        queryItems.forEach { (key: String, value: String) in
+            queryItemsArray.append(URLQueryItem(name: key, value: value))
+        }
+        urlComponent?.queryItems = queryItemsArray
+        
+        guard let url = urlComponent?.url else {
             completion(.failure(.invalidURL))
             return
         }

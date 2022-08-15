@@ -18,6 +18,7 @@ class AppCoordinator {
     
     func start() {
         let viewController = makeMovieList()
+        self.navigationController.setNavigationBarHidden(false, animated: false)
         self.navigationController.pushViewController(viewController, animated: false)
     }
 }

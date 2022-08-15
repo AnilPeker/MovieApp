@@ -21,8 +21,6 @@ struct ApiConstants {
     }
     
     static let getPopularMovie = baseUrl + "movie/popular"
-}
-
-extension String {
+    static let getSearchMovie = baseUrl + "search/movie"
     
 }

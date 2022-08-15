@@ -27,6 +27,7 @@ final class MovieCell: UICollectionViewCell {
     }()
     
     func updateUI(imagePath: String) {
+        imageView.image = nil
         imageView.removeFromSuperview()
         addSubview(imageView)
         imageView.layout.fillSuperview()
@@ -35,6 +36,7 @@ final class MovieCell: UICollectionViewCell {
             guard let self = self else { return }
             let url = URL(string: ApiConstants.imageBaseUrl + imagePath)
             let placeholder = ImagePlaceholder()
+            placeholder.setupUI()
             self.imageView.kf.setImage(with: url,
                                        placeholder: placeholder,
                                        options: [.transition(.fade(0.2)), .cacheMemoryOnly])

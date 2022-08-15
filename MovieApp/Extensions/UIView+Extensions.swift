@@ -101,6 +101,17 @@ struct Layout {
         return constraint
     }
     
+    @discardableResult func pinBottomToSuperview(constant: CGFloat) -> NSLayoutConstraint {
+        let constraint = NSLayoutConstraint(item: element,
+                                            attribute: .bottom,
+                                            relatedBy: .equal,
+                                            toItem: safeSuperview(),
+                                            attribute: .bottom,
+                                            multiplier: 1, constant: constant)
+        safeSuperview().addConstraint(constraint)
+        return constraint
+    }
+    
     @discardableResult func pinBottomToView(view:UIView,constant: CGFloat) -> NSLayoutConstraint {
         let constraint = NSLayoutConstraint(item: element,
                                             attribute: .bottom,
