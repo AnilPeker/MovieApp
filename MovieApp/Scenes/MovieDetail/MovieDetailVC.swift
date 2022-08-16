@@ -54,6 +54,7 @@ class MovieDetailVC: UIViewController {
     
     lazy var castCarousel: CastCarousel = {
         let castCarousel = CastCarousel()
+        castCarousel.delegate = self
         castCarousel.translatesAutoresizingMaskIntoConstraints = false
         castCarousel.heightAnchor.constraint(equalToConstant: 100).isActive = true
         return castCarousel
@@ -130,7 +131,7 @@ class MovieDetailVC: UIViewController {
     }
     
 }
-// MARK: - UI FACTORY
+// MARK: - UI Factory
 extension MovieDetailVC {
     private func makeVideosArea(with model: [Video]) -> UIStackView {
         let vStack = UIView.makeVStack(with: 16, spacing: 5)
@@ -144,6 +145,12 @@ extension MovieDetailVC {
             vStack.addArrangedSubview(UIView.makeSeperator())
         }
         return vStack
+    }
+}
+// MARK: - Cast Delegate
+extension MovieDetailVC: CastCarouselOutput {
+    func selectCast(personId: Int) {
+        viewModel.showCharacterDetail?(personId)
     }
 }
 

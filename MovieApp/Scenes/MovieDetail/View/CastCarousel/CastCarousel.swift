@@ -39,30 +39,44 @@ class CastCarousel: UIView, CastCarouselDelegate {
     }()
     
     weak var delegate: CastCarouselOutput?
-    private var model: [Cast] = []
+    private var castModel: [Cast] = []
+    private var creditsModel: [CastMovieDetail] = []
     
     func setupUI(with model: [Cast]) {
         addSubview(collectionView)
         collectionView.layout.fillSuperview()
-        self.model = model
+        self.castModel = model
+        collectionView.reloadData()
+    }
+    
+    func setupUI(with model: [CastMovieDetail]) {
+        addSubview(collectionView)
+        collectionView.layout.fillSuperview()
+        self.creditsModel = model
         collectionView.reloadData()
     }
     
 }
 extension CastCarousel: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        model.count
+        !castModel.isEmpty ? castModel.count: creditsModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCell.identifier, for: indexPath) as! CastCell
-        let model = self.model[indexPath.row]
-        cell.setupUI(with: model)
+        if !castModel.isEmpty{
+            let model = self.castModel[indexPath.row]
+            cell.setupUI(with: model)
+        } else {
+            let model = self.creditsModel[indexPath.row]
+            cell.setupUI(with: model)
+        }
+            
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let id = model[indexPath.row].id
+        let id = castModel[indexPath.row].id
         self.delegate?.selectCast(personId: id)
     }
 }

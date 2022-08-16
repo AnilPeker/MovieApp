@@ -25,7 +25,6 @@ struct ApiConstants {
     static let getMovieDetail = baseUrl + "movie/%@" //movieId
     static let getMovieCast = baseUrl + "movie/%@/credits" //movieId
     static let getMovieVideos = baseUrl + "movie/%@/videos" //movieId
-    
-    
-    
+    static let getCharacterDetail = baseUrl + "/person/%@" //movieId
+    static let getCharacterCredits = baseUrl + "/person/%@/movie_credits" //movieId
 }

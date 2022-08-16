@@ -32,7 +32,7 @@ class CastCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         return imageView
     }()
     
@@ -59,12 +59,23 @@ class CastCell: UICollectionViewCell {
     
     
     func setupUI(with model: Cast) {
-        backgroundColor = .blue.withAlphaComponent(0.2)
         originalName.setupUI(title: "Name", desc: model.originalName)
         castName.setupUI(title: "Character", desc: model.character)
         personImage.setImage(with: model.profilePath ?? "")
         
+        setupLayout()
+    }
+    
+    func setupUI(with model: CastMovieDetail) {
+        originalName.setupUI(title: "Film Name", desc: model.title)
+        castName.setupUI(title: "Character", desc: model.character)
+        personImage.setImage(with: model.posterPath ?? "")
         
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        backgroundColor = .blue.withAlphaComponent(0.2)
         vStack.addArrangedSubview(originalName)
         vStack.addArrangedSubview(castName)
         
@@ -78,7 +89,6 @@ class CastCell: UICollectionViewCell {
         self.roundCorners(radius: 8)
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
-        
     }
     
 }

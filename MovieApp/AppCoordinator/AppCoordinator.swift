@@ -29,6 +29,12 @@ private extension AppCoordinator {
         self.navigationController.setNavigationBarHidden(false, animated: false)
         self.navigationController.pushViewController(viewController, animated: true)
     }
+    
+    func showCharacterDetail(personId: Int) {
+        let viewController = makeCharacterDetail(personId: personId)
+        self.navigationController.setNavigationBarHidden(false, animated: true)
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
 }
 
 
@@ -46,6 +52,15 @@ private extension AppCoordinator {
     func makeMovieDetail(movieId: Int) -> MovieDetailVC {
         let viewController = MovieDetailVC()
         let viewModel = MovieDetailVM(with: movieId)
+        viewModel.delegate = viewController
+        viewModel.showCharacterDetail = showCharacterDetail(personId:)
+        viewController.viewModel = viewModel
+        return viewController
+    }
+    
+    func makeCharacterDetail(personId: Int) -> CharacterDetailVC {
+        let viewController = CharacterDetailVC()
+        let viewModel = CharacterDetailVM(with: personId)
         viewModel.delegate = viewController
         viewController.viewModel = viewModel
         return viewController

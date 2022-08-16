@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MovieDetailVMCoordinatorProtocol {
-    var goToCharacter: (() -> ())? { get set }
+    var showCharacterDetail: ((Int) -> ())? { get set }
 }
 
 protocol MovieDetailVMDelegate: MovieDetailVMCoordinatorProtocol {
@@ -39,7 +39,7 @@ class MovieDetailVM: MovieDetailVMDelegate {
     var model: MovieDetailResponseModel?
     var castModel: [Cast] = []
     var videosModel: [Video] = []
-    var goToCharacter: (() -> ())?
+    var showCharacterDetail: ((Int) -> ())?
     
     init(with movieId: Int) {
         self.movieId = movieId
