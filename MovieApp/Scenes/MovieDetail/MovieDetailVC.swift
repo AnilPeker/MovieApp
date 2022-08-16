@@ -167,7 +167,7 @@ extension MovieDetailVC: MovieDetailVMDelegateOutputs {
         case .videosFetched:
             setupVideos()
         case .fail(let string):
-            break
+            showErrorPopup(string)
         }
     }
 }

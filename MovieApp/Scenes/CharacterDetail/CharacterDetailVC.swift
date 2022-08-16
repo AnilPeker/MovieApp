@@ -113,7 +113,7 @@ extension CharacterDetailVC: CharacterDetailVMDelegateOutputs {
             castCarousel.isHidden = viewModel.creditsModel.isEmpty
             castCarousel.setupUI(with: viewModel.creditsModel)
         case .fail(let string):
-            break
+            showErrorPopup(string)
         }
     }
 }

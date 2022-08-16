@@ -32,7 +32,5 @@ class SplashVC: BaseVC {
             guard let self = self else { return }
             self.showMovieList?()
         }
-        
-        
     }
 }

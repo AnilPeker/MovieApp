@@ -124,7 +124,7 @@ extension MovieListVC: MovieListVMDelegateOutputs {
             collectionView.isHidden = true
             emptyView.isHidden = false
         case .fail(let string):
-            break
+            showErrorPopup(string)
         }
     }
 }

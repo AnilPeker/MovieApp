@@ -29,8 +29,16 @@ class BaseVC: UIViewController {
     deinit {
         // To be sure that class will deinit
         
-        print("--------------------------------------------------")
-        print("----------\(self.classForCoder) Deinit----------------")
-        print("--------------------------------------------------")
+        log.debug("--------------------------------------------------")
+        log.debug("----------\(self.classForCoder) Deinit----------------")
+        log.debug("--------------------------------------------------")
+    }
+}
+
+extension BaseVC {
+    func showErrorPopup(_ message: String) {
+        let alertView = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alertView, animated: true)
     }
 }
