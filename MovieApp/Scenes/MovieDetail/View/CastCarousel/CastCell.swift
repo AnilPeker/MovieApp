@@ -57,7 +57,9 @@ class CastCell: UICollectionViewCell {
         return titleDescView
     }()
     
+    // Method overloading for setupUI
     
+    // For persons of film
     func setupUI(with model: Cast) {
         originalName.setupUI(title: "Name", desc: model.originalName)
         castName.setupUI(title: "Character", desc: model.character)
@@ -66,6 +68,7 @@ class CastCell: UICollectionViewCell {
         setupLayout()
     }
     
+    // For films of person
     func setupUI(with model: CastMovieDetail) {
         originalName.setupUI(title: "Film Name", desc: model.title)
         castName.setupUI(title: "Character", desc: model.character)

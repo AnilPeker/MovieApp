@@ -63,12 +63,20 @@ class MovieListVC: BaseVC {
 // MARK: - UI
 extension MovieListVC {
     private func setupUI() {
+        // Set background and title
         self.view.backgroundColor = .white
         self.title = Constants.pageTitle.description
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        // Add subviews
         view.addSubview(vStack)
         vStack.addArrangedSubview(searchBar)
         vStack.addArrangedSubview(collectionView)
         vStack.addArrangedSubview(emptyView)
+        
+        // Add Constraints
         vStack.layout.pinHorizontalEdgesToSuperView(padding: 0)
         vStack.layout.pinTopToSuperview(constant: 100)
         vStack.layout.pinBottomToSuperview(constant: 0)
@@ -129,6 +137,7 @@ extension MovieListVC: MovieListVMDelegateOutputs {
     }
 }
 
+// MARK: - Texts
 extension MovieListVC {
     enum Constants: String, CustomStringConvertible {
         case pageTitle = "Movies"

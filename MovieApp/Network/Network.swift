@@ -30,31 +30,27 @@ final class Network: NetworkProtocol {
                 showSpinner: Bool = true,
                 completion: @escaping (Result<T, NetworkError>) -> ()) where T : Decodable {
         
-        var urlComponent = URLComponents(string: endpoint) 
+        // Create url component
+        var urlComponent = URLComponents(string: endpoint)
+        
+        // Append query items to url
         var queryItemsArray: [URLQueryItem] = []
         queryItems.forEach { (key: String, value: String) in
             queryItemsArray.append(URLQueryItem(name: key, value: value))
         }
         urlComponent?.queryItems = queryItemsArray
         
+        // Check url is valid
         guard let url = urlComponent?.url else {
             completion(.failure(.invalidURL))
             return
         }
         
+        // Create URLRequest
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPMethod.GET.rawValue
-        self.executer.execute(urlRequest, showSpinner: showSpinner, completion: completion).resume()
-    }
-    
-    func getImage(from endpoint: String,
-                  completion: @escaping (Result<Data, NetworkError>) -> ()) {
-        guard let url = URL(string: endpoint) else {
-            completion(.failure(.invalidURL))
-            return
-        }
         
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = HTTPMethod.GET.rawValue
+        // Send request to executer
+        self.executer.execute(urlRequest, showSpinner: showSpinner, completion: completion).resume()
     }
 }

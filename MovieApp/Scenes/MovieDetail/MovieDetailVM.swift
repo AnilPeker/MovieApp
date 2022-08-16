@@ -7,10 +7,12 @@
 
 import Foundation
 
+// Coordinator Protocol
 protocol MovieDetailVMCoordinatorProtocol {
     var showCharacterDetail: ((Int) -> ())? { get set }
 }
 
+// View Model Delegate
 protocol MovieDetailVMDelegate: MovieDetailVMCoordinatorProtocol {
     var delegate: MovieDetailVMDelegateOutputs? { get set }
     
@@ -21,10 +23,12 @@ protocol MovieDetailVMDelegate: MovieDetailVMCoordinatorProtocol {
     func fetchDetails()
 }
 
+// Output Protocol - Connection between ViewModel-ViewController
 protocol MovieDetailVMDelegateOutputs: AnyObject {
     func handleViewModelOutputs(_ outputs: MovieDetailVMOutputs)
 }
 
+// Output Types
 enum MovieDetailVMOutputs {
     case movieDetailFetched
     case castFetched
@@ -33,18 +37,31 @@ enum MovieDetailVMOutputs {
 }
 
 class MovieDetailVM: MovieDetailVMDelegate {
-    private var movieId: Int
     private let service: MovieDetailServiceProtocol = Api()
-    weak var delegate: MovieDetailVMDelegateOutputs?
+    weak var delegate: MovieDetailVMDelegateOutputs? //Note: Make it weak to be carefull memory management.
+    
+    // Model
     var model: MovieDetailResponseModel?
     var castModel: [Cast] = []
     var videosModel: [Video] = []
+    
+    // Coordinator
     var showCharacterDetail: ((Int) -> ())?
+    
+    // Variable
+    private var movieId: Int
     
     init(with movieId: Int) {
         self.movieId = movieId
     }
     
+    // Callback output to ViewController
+    private func notify(output: MovieDetailVMOutputs) {
+        self.delegate?.handleViewModelOutputs(output)
+    }
+}
+// MARK: - Service
+extension MovieDetailVM {
     func fetchDetails() {
         service.getMovieDetail(with: movieId) { [weak self] response in
             guard let self = self else { return }
@@ -60,7 +77,7 @@ class MovieDetailVM: MovieDetailVMDelegate {
         }
     }
     
-    func fetchCast() {
+    private func fetchCast() {
         service.getMovieCast(with: movieId) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -73,7 +90,7 @@ class MovieDetailVM: MovieDetailVMDelegate {
         }
     }
     
-    func fetchVideos() {
+    private func fetchVideos() {
         service.getMovieVideo(with: movieId) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -84,9 +101,5 @@ class MovieDetailVM: MovieDetailVMDelegate {
                 self.notify(output: .fail(error.localizedDescription))
             }
         }
-    }
-    
-    private func notify(output: MovieDetailVMOutputs) {
-        self.delegate?.handleViewModelOutputs(output)
     }
 }

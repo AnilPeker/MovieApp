@@ -11,6 +11,7 @@ import Lottie
 class MovieListEmptyView: UIView {
     override var isHidden: Bool {
         didSet {
+            // Start-Stop animation according to apperience of view
             if isHidden {
                 animationView.stop()
             } else {
@@ -45,11 +46,12 @@ class MovieListEmptyView: UIView {
     
     
     func setupUI() {
+        // Add subvies
         addSubview(vStack)
-        
         vStack.addArrangedSubview(animationView)
         vStack.addArrangedSubview(label)
         
+        // Add constraints
         vStack.layout.centerVertically()
         vStack.layout.centerHorizontally()
     }

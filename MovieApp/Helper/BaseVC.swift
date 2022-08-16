@@ -15,17 +15,7 @@ class BaseVC: UIViewController {
         super.viewDidLoad()
         setupKeyboardOutsideTap()
     }
-    
-    private func setupKeyboardOutsideTap() {
-        let tapView = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapView.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapView)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
+
     deinit {
         // To be sure that class will deinit
         
@@ -34,7 +24,20 @@ class BaseVC: UIViewController {
         log.debug("--------------------------------------------------")
     }
 }
+// MARK: - Keyboard Dismisser
+extension BaseVC {
+    private func setupKeyboardOutsideTap() {
+        let tapView = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapView.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapView)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 
+// MARK: - Error Popup
 extension BaseVC {
     func showErrorPopup(_ message: String) {
         let alertView = UIAlertController(title: "Error", message: message, preferredStyle: .alert)

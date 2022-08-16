@@ -23,6 +23,7 @@ class SplashVC: BaseVC {
         setupUI()
     }
     
+    // Wait until splash animation is over
     private func setupUI() {
         view.backgroundColor = .cyan.withAlphaComponent(0.5)
         view.addSubview(animationView)

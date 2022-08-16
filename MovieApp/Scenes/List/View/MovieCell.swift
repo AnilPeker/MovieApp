@@ -10,12 +10,15 @@ import UIKit
 import Kingfisher
 
 final class MovieCell: UICollectionViewCell {
+    
+    // Item Size
     static var itemSize: CGSize {
         let width = UIScreen.main.bounds.width / 2
         let height = width * 1.3
         return CGSize(width: width, height: height)
     }
     
+    // Cell Identifier
     static var identifier: String {
         return String(describing: self)
     }
@@ -27,10 +30,15 @@ final class MovieCell: UICollectionViewCell {
     }()
     
     func updateUI(imagePath: String) {
+        // Reset View
         imageView.image = nil
         imageView.removeFromSuperview()
+        
+        // Add subview
         addSubview(imageView)
         imageView.layout.fillSuperview()
+        
+        // Set data
         imageView.setImage(with: imagePath, size: .w185)
     }
     

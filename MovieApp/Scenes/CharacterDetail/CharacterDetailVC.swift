@@ -59,34 +59,43 @@ class CharacterDetailVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set background and title
         title = Constants.pageTitle.description
         view.backgroundColor = .white
+        
+        // Fetch detail data in viewDidLoad
         viewModel.fetchCharacterDetails()
+        
+        // Configure Layout
         configureScrollViewAndStackView()
     }
     
     private func configureScrollViewAndStackView() {
+        // Scroll View - VStack relationship
         scrollView.addSubview(vStack)
         view.addSubview(scrollView)
         
+        // VStack must be equal to scroll view height but height priorty must be low because VStack can decide its own height according to its subviews.
         vStack.layout.fillSuperview()
         let height = vStack.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1)
         height.priority = .defaultLow
         height.isActive = true
         vStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1).isActive = true
         
+        // Add Constraints to UIScrollView - UIViewController
         scrollView.layout.pinHorizontalEdgesToSuperView(padding: 0)
         scrollView.layout.pinTopToSuperview(constant: 100)
         scrollView.layout.pinBottomToSuperview(constant: 0)
     }
     
     private func setupUI() {
+        // Set service data to view
         personImageView.setImage(with: viewModel.characterModel?.profilePath ?? "", size: .h632)
         personNameLbl.text = viewModel.characterModel?.name ?? ""
         personSummaryLbl.text = viewModel.characterModel?.biography ?? ""
         
+        // Add subviews to VStack
         vStack.addArrangedSubview(personImageView)
-        
         let innerVStack = UIView.makeVStack(with: 16, spacing: 10)
         innerVStack.addArrangedSubview(personNameLbl)
         innerVStack.addArrangedSubview(UIView.makeSeperator())
@@ -100,10 +109,12 @@ class CharacterDetailVC: BaseVC {
     
 }
 
+// MARK: - Cast Carousel Output
 extension CharacterDetailVC: CastCarouselOutput {
     func selectCast(personId: Int) {}
 }
 
+// MARK: - Outputs
 extension CharacterDetailVC: CharacterDetailVMDelegateOutputs {
     func handleViewModelOutputs(_ outputs: CharacterDetailVMOutputs) {
         switch outputs {

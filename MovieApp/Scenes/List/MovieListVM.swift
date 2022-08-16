@@ -7,10 +7,12 @@
 
 import Foundation
 
+// Coordinator Protocol
 protocol MovieListVMCoordinatorProtocol {
     var showMovieDetail: ((Int) -> ())? { get set }
 }
 
+// View Model Delegate
 protocol MovieListVMDelegate: MovieListVMCoordinatorProtocol {
     var delegate: MovieListVMDelegateOutputs? { get set }
     var movies: [Movie] { get set }
@@ -18,10 +20,12 @@ protocol MovieListVMDelegate: MovieListVMCoordinatorProtocol {
     func fetchMovies()
 }
 
+// Output Protocol - Connection between ViewModel-ViewController
 protocol MovieListVMDelegateOutputs: AnyObject {
     func handleViewModelOutputs(_ outputs: MovieListVMOutputs)
 }
 
+// Output Types
 enum MovieListVMOutputs {
     case reloadData
     case resultNotFound
@@ -29,10 +33,20 @@ enum MovieListVMOutputs {
 }
 
 class MovieListVM: MovieListVMDelegate {
-    weak var delegate: MovieListVMDelegateOutputs? //Note: Maked weak to be carefull memory management.
+    weak var delegate: MovieListVMDelegateOutputs? //Note: Make it weak to be carefull memory management.
     private let service: MovieServiceProtocol = Api()
-    private var dispatchWorkItem: DispatchWorkItem?
+    
+    // Model
     var movies: [Movie] = []
+    
+    // Coordinator
+    var showMovieDetail: ((Int) -> ())?
+    
+    // Variables
+    private var dispatchWorkItem: DispatchWorkItem?
+    private var page: Int = 1
+    private var totalPage: Int = 0
+    private var isFirstLoad: Bool = true
     var searchText: String = "" {
         didSet {
             guard searchText.count > 0 || movies.isEmpty else { return }
@@ -43,16 +57,12 @@ class MovieListVM: MovieListVMDelegate {
                 self.fetchMovies()
             }
             
-            // To wait until writing over
+            // To wait until writing is over
             DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5, execute: dispatchWorkItem!)
         }
     }
-    var showMovieDetail: ((Int) -> ())?
     
-    private var page: Int = 1
-    private var totalPage: Int = 0
-    private var isFirstLoad: Bool = true
-    
+    // Check search status
     func fetchMovies() {
         if searchText.count < 2 {
             fetchMostPopularMovies()
@@ -61,7 +71,20 @@ class MovieListVM: MovieListVMDelegate {
         }
     }
     
+    func resetList() {
+        movies = []
+        page = 1
+        totalPage = 0
+        notify(output: .reloadData)
+    }
     
+    // Callback output to ViewController
+    private func notify(output: MovieListVMOutputs) {
+        self.delegate?.handleViewModelOutputs(output)
+    }
+}
+// MARK: - Service
+extension MovieListVM {
     func fetchMostPopularMovies() {
         guard page != totalPage else { return }
         
@@ -112,16 +135,5 @@ class MovieListVM: MovieListVMDelegate {
                 self.notify(output: .fail(error.localizedDescription))
             }
         }
-    }
-    
-    func resetList() {
-        movies = []
-        page = 1
-        totalPage = 0
-        notify(output: .reloadData)
-    }
-    
-    private func notify(output: MovieListVMOutputs) {
-        self.delegate?.handleViewModelOutputs(output)
     }
 }

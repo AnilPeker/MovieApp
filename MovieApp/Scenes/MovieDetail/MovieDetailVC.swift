@@ -75,11 +75,16 @@ class MovieDetailVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set background and title
         view.backgroundColor = .white
         title = Constants.pageTitle.description
+        
+        // Fetch detail data in viewDidLoad
         viewModel.fetchDetails()
     }
-    
+}
+// MARK: - UI
+extension MovieDetailVC {
     private func setupUI() {
         configureScrollViewAndStackView()
         setupDetailViews()
@@ -87,37 +92,45 @@ class MovieDetailVC: BaseVC {
     }
     
     private func configureScrollViewAndStackView() {
+        // Scroll View - VStack relationship
+        
         scrollView.addSubview(vStack)
         view.addSubview(scrollView)
         
+        // VStack must be equal to scroll view height but height priorty must be low because VStack can decide its own height according to its subviews.
         vStack.layout.fillSuperview()
         let height = vStack.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1)
         height.priority = .defaultLow
         height.isActive = true
         vStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1).isActive = true
         
+        // Add Constraints to UIScrollView - UIViewController
         scrollView.layout.pinHorizontalEdgesToSuperView(padding: 0)
         scrollView.layout.pinTopToSuperview(constant: 100)
         scrollView.layout.pinBottomToSuperview(constant: 0)
     }
     
     private func setupDetailViews() {
+        // Set service data to view
         let headerVStack = UIView.makeVStack(with: 16, spacing: 16)
         movieImage.setImage(with: viewModel.model?.posterPath ?? "", size: .original)
         movieNameLbl.text = viewModel.model?.title ?? ""
         movieSummaryLbl.text = viewModel.model?.overview
         
+        // Add subviews to VStack
         vStack.addArrangedSubview(movieImage)
         headerVStack.addArrangedSubview(movieNameLbl)
         headerVStack.addArrangedSubview(UIView.makeSeperator())
         headerVStack.addArrangedSubview(movieSummaryLbl)
         headerVStack.addArrangedSubview(UIView.makeSeperator())
         
+        // Set rating data to view
         let rating = viewModel.model?.voteAverage ?? 0
         movieRatingView.setupUI(title: Constants.rating.description, desc: String(rating))
         headerVStack.addArrangedSubview(movieRatingView)
         headerVStack.addArrangedSubview(UIView.makeSeperator())
         
+        // Add subviews to Main VStack
         vStack.addArrangedSubview(headerVStack)
     }
     
@@ -130,10 +143,11 @@ class MovieDetailVC: BaseVC {
         let videoArea = makeVideosArea(with: viewModel.videosModel)
         vStack.addArrangedSubview(videoArea)
     }
-    
 }
+
 // MARK: - UI Factory
 extension MovieDetailVC {
+    // Create video area according to video data count
     private func makeVideosArea(with model: [Video]) -> UIStackView {
         let vStack = UIView.makeVStack(with: 16, spacing: 5)
         vStack.addArrangedSubview(videosHeaderLbl)
@@ -172,6 +186,7 @@ extension MovieDetailVC: MovieDetailVMDelegateOutputs {
     }
 }
 
+// MARK: - Texts
 extension MovieDetailVC {
     enum Constants: String, CustomStringConvertible {
         case pageTitle = "Movie Detail"

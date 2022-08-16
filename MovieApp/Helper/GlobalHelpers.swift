@@ -7,6 +7,7 @@
 
 import Foundation
 
+// To increase developement speed this functions are usable.
 func onMain(completion: @escaping () -> Void) -> Void {
     DispatchQueue.main.async {
         completion()

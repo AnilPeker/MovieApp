@@ -39,20 +39,25 @@ class CastCarousel: UIView, CastCarouselDelegate {
     }()
     
     weak var delegate: CastCarouselOutput?
+    
+    // Models
     private var castModel: [Cast] = []
     private var creditsModel: [CastMovieDetail] = []
     
+    // Method overloading for SetupUI
     func setupUI(with model: [Cast]) {
-        addSubview(collectionView)
-        collectionView.layout.fillSuperview()
-        self.castModel = model
-        collectionView.reloadData()
+        castModel = model
+        setupLayout()
     }
     
     func setupUI(with model: [CastMovieDetail]) {
+        creditsModel = model
+        setupLayout()
+    }
+    
+    private func setupLayout() {
         addSubview(collectionView)
         collectionView.layout.fillSuperview()
-        self.creditsModel = model
         collectionView.reloadData()
     }
     
