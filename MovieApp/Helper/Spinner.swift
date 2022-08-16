@@ -13,7 +13,7 @@ private var spinnerContainer: UIView?
 
 open class Spinner {
     static func start() {
-        guard let window = UIWindow.key else { return }
+        guard let window = UIWindow.key, spinnerContainer == nil else { return }
         spinnerContainer = UIView.init(frame: window.bounds)
         animationView = .init(name: "spinner")
         

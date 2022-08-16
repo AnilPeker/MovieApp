@@ -18,7 +18,7 @@ extension Api: MovieServiceProtocol {
     }
     
     func getSearchedMovies(queryItems: [String : String], completion: @escaping (Result<MoviesResponseModel, NetworkError>) -> Void) {
-        network.get(from: ApiConstants.getSearchMovie, queryItems: queryItems, showSpinner: true, completion: completion)
+        network.get(from: ApiConstants.getSearchMovie, queryItems: queryItems, showSpinner: false, completion: completion)
     }
     
 }

@@ -6,20 +6,32 @@
 //
 
 import UIKit
+import Lottie
 
 class MovieListEmptyView: UIView {
+    override var isHidden: Bool {
+        didSet {
+            if isHidden {
+                animationView.stop()
+            } else {
+                animationView.play()
+            }
+        }
+    }
+    
     lazy var vStack: UIStackView = {
         let vStack = UIStackView()
         vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.axis = .vertical
-        vStack.spacing = 10
+        vStack.spacing = 20
         return vStack
     }()
     
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    lazy var animationView: AnimationView = {
+        let animationView = AnimationView(name: "searchResult")
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        animationView.loopMode = .loop
+        return animationView
     }()
     
     lazy var label: UILabel = {
@@ -27,6 +39,7 @@ class MovieListEmptyView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18)
         label.text = "Result not Found"
+        label.textAlignment = .center
         return label
     }()
     
@@ -34,7 +47,7 @@ class MovieListEmptyView: UIView {
     func setupUI() {
         addSubview(vStack)
         
-        vStack.addArrangedSubview(imageView)
+        vStack.addArrangedSubview(animationView)
         vStack.addArrangedSubview(label)
         
         vStack.layout.centerVertically()

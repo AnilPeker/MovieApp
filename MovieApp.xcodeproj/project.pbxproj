@@ -52,6 +52,7 @@
 		27B37ACF28ABC68600636911 /* spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B37ACE28ABC68600636911 /* spinner.json */; };
 		27B37AD128ABCA8100636911 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37AD028ABCA8100636911 /* Spinner.swift */; };
 		27B37AD328ABCF9500636911 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37AD228ABCF9500636911 /* BaseVC.swift */; };
+		27B37AD528ABD80500636911 /* searchResult.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B37AD428ABD80500636911 /* searchResult.json */; };
 		A478FEAC1AFEA25984E0A08D /* Pods_MovieApp_MovieAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADA9D058392D5F6C8AD02DD /* Pods_MovieApp_MovieAppUITests.framework */; };
 		FC6149C32ADCBD95173C46BA /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CFE1576E6FC443013C8498 /* Pods_MovieApp.framework */; };
 /* End PBXBuildFile section */
@@ -124,6 +125,7 @@
 		27B37ACE28ABC68600636911 /* spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = spinner.json; sourceTree = "<group>"; };
 		27B37AD028ABCA8100636911 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		27B37AD228ABCF9500636911 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		27B37AD428ABD80500636911 /* searchResult.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = searchResult.json; sourceTree = "<group>"; };
 		3A960478B5F03F19A26AA378 /* Pods-MovieApp-MovieAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp-MovieAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp-MovieAppUITests/Pods-MovieApp-MovieAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		991000D5B242A84625DF28FC /* Pods-MovieAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieAppTests.release.xcconfig"; path = "Target Support Files/Pods-MovieAppTests/Pods-MovieAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		B66B986E1044DE8DD2B4892A /* Pods_MovieAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +283,7 @@
 			children = (
 				273EEDDA28A69BDF0045780F /* movie.json */,
 				27B37ACE28ABC68600636911 /* spinner.json */,
+				27B37AD428ABD80500636911 /* searchResult.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27B37AD528ABD80500636911 /* searchResult.json in Resources */,
 				27B37ACF28ABC68600636911 /* spinner.json in Resources */,
 				273EEDB128A6975A0045780F /* LaunchScreen.storyboard in Resources */,
 				273EEDDB28A69BDF0045780F /* movie.json in Resources */,
