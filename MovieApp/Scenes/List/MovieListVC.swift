@@ -24,6 +24,7 @@ class MovieListVC: BaseVC {
         searchBar.placeholder = Constants.searchPlaceholder.description
         searchBar.keyboardType = .default
         searchBar.autocorrectionType = .no
+        searchBar.showsCancelButton = false
         return searchBar
     }()
     
@@ -106,6 +107,9 @@ extension MovieListVC: UISearchBarDelegate {
         viewModel.searchText = searchText
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.searchText = ""
+    }
     
 }
 // MARK: - Outputs
