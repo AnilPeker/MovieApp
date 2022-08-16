@@ -9,11 +9,18 @@ import Foundation
 import UIKit
 import Kingfisher
 
+enum ImageSize: String {
+    case original
+    case w500
+    case w185
+    case h632
+}
+
 extension UIImageView {
-    func setImage(with imagePath: String) {
+    func setImage(with imagePath: String, size: ImageSize) {
         onMain { [weak self] in
             guard let self = self else { return }
-            let url = URL(string: ApiConstants.imageBaseUrl + imagePath)
+            let url = URL(string: ApiConstants.imageBaseUrl + size.rawValue + imagePath)
             let placeholder = ImagePlaceholder()
             placeholder.setupUI()
             self.kf.setImage(with: url,

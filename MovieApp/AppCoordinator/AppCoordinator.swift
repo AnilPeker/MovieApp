@@ -17,13 +17,19 @@ class AppCoordinator {
     }
     
     func start() {
-        let viewController = makeMovieList()
-        self.navigationController.setNavigationBarHidden(false, animated: false)
+        let viewController = makeSplash()
+        self.navigationController.setNavigationBarHidden(true, animated: false)
         self.navigationController.pushViewController(viewController, animated: false)
     }
 }
 // MARK: - Show Functions
 private extension AppCoordinator {
+    func showMovieList() {
+        let viewController = makeMovieList()
+        self.navigationController.setNavigationBarHidden(false, animated: false)
+        self.navigationController.viewControllers = [viewController]
+    }
+    
     func showMovieDetail(movieId: Int) {
         let viewController = makeMovieDetail(movieId: movieId)
         self.navigationController.setNavigationBarHidden(false, animated: false)
@@ -37,9 +43,14 @@ private extension AppCoordinator {
     }
 }
 
-
 // MARK: - Controller Factory
 private extension AppCoordinator {
+    func makeSplash() -> SplashVC {
+        let viewController = SplashVC()
+        viewController.showMovieList = showMovieList
+        return viewController
+    }
+    
     func makeMovieList() -> MovieListVC {
         let viewController = MovieListVC()
         let viewModel = MovieListVM()

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MovieDetailVC: UIViewController {
+class MovieDetailVC: BaseVC {
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +23,8 @@ class MovieDetailVC: UIViewController {
     lazy var movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -102,7 +103,7 @@ class MovieDetailVC: UIViewController {
     
     private func setupDetailViews() {
         let headerVStack = UIView.makeVStack(with: 16, spacing: 16)
-        movieImage.setImage(with: viewModel.model?.posterPath ?? "")
+        movieImage.setImage(with: viewModel.model?.posterPath ?? "", size: .original)
         movieNameLbl.text = viewModel.model?.title ?? ""
         movieSummaryLbl.text = viewModel.model?.overview
         

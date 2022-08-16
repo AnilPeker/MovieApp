@@ -48,6 +48,10 @@
 		27B37AC328AB8D5500636911 /* CharacterDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37AC228AB8D5500636911 /* CharacterDetailService.swift */; };
 		27B37AC628AB8D9800636911 /* CharacterDetailResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37AC528AB8D9800636911 /* CharacterDetailResponseModel.swift */; };
 		27B37AC828AB8DA800636911 /* CharacterCreditsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37AC728AB8DA800636911 /* CharacterCreditsResponseModel.swift */; };
+		27B37ACB28ABB99F00636911 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37ACA28ABB99F00636911 /* SplashVC.swift */; };
+		27B37ACF28ABC68600636911 /* spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B37ACE28ABC68600636911 /* spinner.json */; };
+		27B37AD128ABCA8100636911 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37AD028ABCA8100636911 /* Spinner.swift */; };
+		27B37AD328ABCF9500636911 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37AD228ABCF9500636911 /* BaseVC.swift */; };
 		A478FEAC1AFEA25984E0A08D /* Pods_MovieApp_MovieAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADA9D058392D5F6C8AD02DD /* Pods_MovieApp_MovieAppUITests.framework */; };
 		FC6149C32ADCBD95173C46BA /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CFE1576E6FC443013C8498 /* Pods_MovieApp.framework */; };
 /* End PBXBuildFile section */
@@ -116,6 +120,10 @@
 		27B37AC228AB8D5500636911 /* CharacterDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailService.swift; sourceTree = "<group>"; };
 		27B37AC528AB8D9800636911 /* CharacterDetailResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailResponseModel.swift; sourceTree = "<group>"; };
 		27B37AC728AB8DA800636911 /* CharacterCreditsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCreditsResponseModel.swift; sourceTree = "<group>"; };
+		27B37ACA28ABB99F00636911 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		27B37ACE28ABC68600636911 /* spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = spinner.json; sourceTree = "<group>"; };
+		27B37AD028ABCA8100636911 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		27B37AD228ABCF9500636911 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		3A960478B5F03F19A26AA378 /* Pods-MovieApp-MovieAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp-MovieAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp-MovieAppUITests/Pods-MovieApp-MovieAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		991000D5B242A84625DF28FC /* Pods-MovieAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieAppTests.release.xcconfig"; path = "Target Support Files/Pods-MovieAppTests/Pods-MovieAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		B66B986E1044DE8DD2B4892A /* Pods_MovieAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,9 +231,10 @@
 		273EEDD528A698E50045780F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				273EEDD828A698FF0045780F /* CharacterDetail */,
-				273EEDD728A698F70045780F /* MovieDetail */,
+				27B37AC928ABB83100636911 /* Splash */,
 				273EEDD628A698F20045780F /* List */,
+				273EEDD728A698F70045780F /* MovieDetail */,
+				273EEDD828A698FF0045780F /* CharacterDetail */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -271,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				273EEDDA28A69BDF0045780F /* movie.json */,
+				27B37ACE28ABC68600636911 /* spinner.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -330,6 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				27569C9728A96BE100AD72FE /* GlobalHelpers.swift */,
+				27B37AD028ABCA8100636911 /* Spinner.swift */,
+				27B37AD228ABCF9500636911 /* BaseVC.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -411,6 +423,14 @@
 				27B37AC728AB8DA800636911 /* CharacterCreditsResponseModel.swift */,
 			);
 			path = CharacterDetail;
+			sourceTree = "<group>";
+		};
+		27B37AC928ABB83100636911 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				27B37ACA28ABB99F00636911 /* SplashVC.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		61019DB5ADF0AD776A86F01B /* Frameworks */ = {
@@ -545,6 +565,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27B37ACF28ABC68600636911 /* spinner.json in Resources */,
 				273EEDB128A6975A0045780F /* LaunchScreen.storyboard in Resources */,
 				273EEDDB28A69BDF0045780F /* movie.json in Resources */,
 				273EEDAE28A6975A0045780F /* Assets.xcassets in Resources */,
@@ -681,6 +702,7 @@
 				27B37AC028AB7E1C00636911 /* CharacterDetailVM.swift in Sources */,
 				27569C9828A96BE100AD72FE /* GlobalHelpers.swift in Sources */,
 				27569C8B28A964B000AD72FE /* ApiConstants.swift in Sources */,
+				27B37ACB28ABB99F00636911 /* SplashVC.swift in Sources */,
 				27569C9B28AA2A9B00AD72FE /* Api.swift in Sources */,
 				27569C7428A9474900AD72FE /* AppCoordinator.swift in Sources */,
 				27B37AC328AB8D5500636911 /* CharacterDetailService.swift in Sources */,
@@ -693,7 +715,9 @@
 				27B37AC628AB8D9800636911 /* CharacterDetailResponseModel.swift in Sources */,
 				27569C7628A947EC00AD72FE /* MovieListVC.swift in Sources */,
 				27569C7828A947F900AD72FE /* MovieListVM.swift in Sources */,
+				27B37AD128ABCA8100636911 /* Spinner.swift in Sources */,
 				27569C9028A967CE00AD72FE /* NetworkError.swift in Sources */,
+				27B37AD328ABCF9500636911 /* BaseVC.swift in Sources */,
 				27569C9228A96A5B00AD72FE /* NetworkDefauts.swift in Sources */,
 				27569CB828AAE09100AD72FE /* VerticalTitleDescView.swift in Sources */,
 				27569C8628A9610A00AD72FE /* ImagePlaceholder.swift in Sources */,

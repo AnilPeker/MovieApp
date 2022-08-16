@@ -17,7 +17,7 @@ struct ApiConstants {
     }
     
     static var imageBaseUrl: String {
-        return "https://image.tmdb.org/t/p/original"
+        return "https://image.tmdb.org/t/p/"
     }
     
     static let getPopularMovie = baseUrl + "movie/popular"

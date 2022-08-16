@@ -61,7 +61,7 @@ class CastCell: UICollectionViewCell {
     func setupUI(with model: Cast) {
         originalName.setupUI(title: "Name", desc: model.originalName)
         castName.setupUI(title: "Character", desc: model.character)
-        personImage.setImage(with: model.profilePath ?? "")
+        personImage.setImage(with: model.profilePath ?? "", size: .w185)
         
         setupLayout()
     }
@@ -69,7 +69,7 @@ class CastCell: UICollectionViewCell {
     func setupUI(with model: CastMovieDetail) {
         originalName.setupUI(title: "Film Name", desc: model.title)
         castName.setupUI(title: "Character", desc: model.character)
-        personImage.setImage(with: model.posterPath ?? "")
+        personImage.setImage(with: model.posterPath ?? "", size: .w185)
         
         setupLayout()
     }

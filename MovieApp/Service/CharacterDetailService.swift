@@ -22,6 +22,6 @@ extension Api: CharacterDetailServiceProtocol {
     func getCharacterCredits(with personId: Int, completion: @escaping (Result<CharacterCreditsResponseModel, NetworkError>) -> Void) {
         let url = String(format: ApiConstants.getCharacterCredits, "\(personId)")
         network.get(from: url, queryItems: ["api_key": ApiConstants.apiKey],
-                    showSpinner: true, completion: completion)
+                    showSpinner: false, completion: completion)
     }
 }

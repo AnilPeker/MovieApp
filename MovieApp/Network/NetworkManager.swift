@@ -18,8 +18,13 @@ final class NetworkManager: ExecuterProtocol {
                            showSpinner: Bool = true,
                            completion: @escaping (Result<T,NetworkError>)->()) -> URLSessionDataTask where T: Decodable {
         
+        if showSpinner {
+            Spinner.start()
+        }
         
         return session.dataTask(with: urlRequest) { data, urlResponse, error in
+            
+            Spinner.stop()
             
             guard error == nil else {
                 onMain {

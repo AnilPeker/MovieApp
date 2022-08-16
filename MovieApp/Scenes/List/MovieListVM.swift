@@ -51,6 +51,7 @@ class MovieListVM: MovieListVMDelegate {
     
     private var page: Int = 1
     private var totalPage: Int = 0
+    private var isFirstLoad: Bool = true
     
     func fetchMovies() {
         if searchText.count < 2 {
@@ -66,7 +67,7 @@ class MovieListVM: MovieListVMDelegate {
         
         let queryItems: [String: String] = ["api_key": ApiConstants.apiKey,
                                             "page": "\(page)"]
-        service.getMostPopularMovies(queryItems: queryItems) { [weak self] response in
+        service.getMostPopularMovies(queryItems: queryItems, showSpinner: isFirstLoad) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let data):
@@ -84,6 +85,8 @@ class MovieListVM: MovieListVMDelegate {
                 self.notify(output: .fail(error.localizedDescription))
             }
         }
+        
+        isFirstLoad = false
     }
     
     func fetchSearch() {

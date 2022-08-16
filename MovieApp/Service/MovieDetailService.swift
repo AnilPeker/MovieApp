@@ -23,12 +23,12 @@ extension Api: MovieDetailServiceProtocol {
     func getMovieCast(with movieId: Int, completion: @escaping (Result<MovieCastResponseModel, NetworkError>) -> Void) {
         let url = String(format: ApiConstants.getMovieCast, "\(movieId)")
         network.get(from: url, queryItems: ["api_key": ApiConstants.apiKey],
-                    showSpinner: true, completion: completion)
+                    showSpinner: false, completion: completion)
     }
     
     func getMovieVideo(with movieId: Int, completion: @escaping (Result<MovieVideosModel, NetworkError>) -> Void) {
         let url = String(format: ApiConstants.getMovieVideos, "\(movieId)")
         network.get(from: url, queryItems: ["api_key": ApiConstants.apiKey],
-                    showSpinner: true, completion: completion)
+                    showSpinner: false, completion: completion)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CharacterDetailVC: UIViewController {
+class CharacterDetailVC: BaseVC {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +81,7 @@ class CharacterDetailVC: UIViewController {
     }
     
     private func setupUI() {
-        personImageView.setImage(with: viewModel.characterModel?.profilePath ?? "")
+        personImageView.setImage(with: viewModel.characterModel?.profilePath ?? "", size: .h632)
         personNameLbl.text = viewModel.characterModel?.name ?? ""
         personSummaryLbl.text = viewModel.characterModel?.biography ?? ""
         

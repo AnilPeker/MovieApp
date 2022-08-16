@@ -31,16 +31,7 @@ final class MovieCell: UICollectionViewCell {
         imageView.removeFromSuperview()
         addSubview(imageView)
         imageView.layout.fillSuperview()
-        
-        onMain { [weak self] in
-            guard let self = self else { return }
-            let url = URL(string: ApiConstants.imageBaseUrl + imagePath)
-            let placeholder = ImagePlaceholder()
-            placeholder.setupUI()
-            self.imageView.kf.setImage(with: url,
-                                       placeholder: placeholder,
-                                       options: [.transition(.fade(0.2)), .cacheMemoryOnly])
-        }
+        imageView.setImage(with: imagePath, size: .w185)
     }
     
 }

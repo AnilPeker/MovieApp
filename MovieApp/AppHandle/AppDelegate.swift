@@ -7,6 +7,31 @@
 
 import UIKit
 import Bagel
+import SwiftyBeaver
+let log = SwiftyBeaver.self
+
+/*
+ iOS Version: 11.0 +
+ Architecture: MVVM-C
+ Project Style: Only Programatic
+ Package Manager: CocoaPods
+ Dependencies:
+    KingFisher - Image fetching and caching
+    Bagel - Service Logger
+    Lottie - Animator
+ Network Layer: Own Creature
+ 
+ While developing, attention was paid to:
+    - Testable code
+    - Protocol Oriented
+    - SOLID Principles
+    - Foldering
+    - Reusibility
+    - Readiblity
+ 
+ */
+
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

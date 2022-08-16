@@ -76,6 +76,7 @@ extension CastCarousel: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard !castModel.isEmpty else { return }
         let id = castModel[indexPath.row].id
         self.delegate?.selectCast(personId: id)
     }

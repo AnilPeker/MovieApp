@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MovieListVC: UIViewController {
+class MovieListVC: BaseVC {
     lazy var vStack: UIStackView = {
         let vStack = UIStackView()
         vStack.translatesAutoresizingMaskIntoConstraints = false
