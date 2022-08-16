@@ -23,7 +23,7 @@ class MovieDetailVC: UIViewController {
     lazy var movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 400).isActive = true
         return imageView
     }()
     
@@ -80,8 +80,7 @@ class MovieDetailVC: UIViewController {
     
     private func setupUI() {
         configureScrollViewAndStackView()
-        setupHeaderDesc()
-        setupRating()
+        setupDetailViews()
         setupCast()
     }
     
@@ -100,7 +99,7 @@ class MovieDetailVC: UIViewController {
         scrollView.layout.pinBottomToSuperview(constant: 0)
     }
     
-    private func setupHeaderDesc() {
+    private func setupDetailViews() {
         let headerVStack = UIView.makeVStack(with: 16, spacing: 16)
         movieImage.setImage(with: viewModel.model?.posterPath ?? "")
         movieNameLbl.text = viewModel.model?.title ?? ""
@@ -112,16 +111,17 @@ class MovieDetailVC: UIViewController {
         headerVStack.addArrangedSubview(movieSummaryLbl)
         headerVStack.addArrangedSubview(UIView.makeSeperator())
         
-        vStack.addArrangedSubview(headerVStack)
-    }
-    
-    private func setupRating() {
         let rating = viewModel.model?.voteAverage ?? 0
         movieRatingView.setupUI(title: Constants.rating.description, desc: String(rating))
+        headerVStack.addArrangedSubview(movieRatingView)
+        headerVStack.addArrangedSubview(UIView.makeSeperator())
+        
+        vStack.addArrangedSubview(headerVStack)
     }
     
     private func setupCast() {
         vStack.addArrangedSubview(castCarousel)
+        vStack.addArrangedSubview(UIView.makeSeperator())
     }
     
     private func setupVideos() {
@@ -135,12 +135,13 @@ extension MovieDetailVC {
     private func makeVideosArea(with model: [Video]) -> UIStackView {
         let vStack = UIView.makeVStack(with: 16, spacing: 5)
         vStack.addArrangedSubview(videosHeaderLbl)
-        vStack.distribution = .fillEqually
+        vStack.distribution = .fill
         model.forEach { data in
             let titleDescView = VerticalTitleDescView()
             titleDescView.setupUI(title: data.name, desc: data.site)
             titleDescView.translatesAutoresizingMaskIntoConstraints = false
             vStack.addArrangedSubview(titleDescView)
+            vStack.addArrangedSubview(UIView.makeSeperator())
         }
         return vStack
     }
@@ -167,7 +168,7 @@ extension MovieDetailVC {
     enum Constants: String, CustomStringConvertible {
         case pageTitle = "Movie Detail"
         case videos = "Videos"
-        case rating = "rating"
+        case rating = "Rating"
         
         var description: String { return self.rawValue }
     }
